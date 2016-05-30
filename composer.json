@@ -1,0 +1,23 @@
+{
+	"name": "cmsgears/module-stripe",
+	"description": "The Stripe Module required for the projects which need Stripe to accept payments.",
+	"homepage": "http://www.cmsgears.org",
+	"type": "package",
+	"keywords": [ "yii2", "cmsgears", "module", "stripe" ],
+	"license": "GPLv3",
+	"support": {
+		"resources": "http://www.cmsgears.org"
+	},
+	"autoload": {
+		"psr-4": {
+			"cmsgears\\stripe\\": ""
+		}
+	},
+    "require": {
+        "php": ">=5.4.0",
+        "cmsgears/module-core": "*",
+        "cmsgears/module-payment": "*",
+        "cmsgears/module-cart": "*",
+    	"stripe/stripe-php": "3.14.*"
+    }
+}
