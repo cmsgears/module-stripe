@@ -73,7 +73,7 @@ class m160623_103639_stripe_data extends \yii\db\Migration {
 
 		$columns = [ 'modelId', 'name', 'label', 'type', 'valueType', 'value' ];
 
-		$attributes	= [
+		$metas	= [
 			[ $this->site->id, 'status', 'Status', 'stripe','text', null ],
 			[ $this->site->id, 'payments', 'Payments', 'stripe','flag', '0' ],
 			[ $this->site->id, 'currency','Currency', 'stripe','text', 'USD' ],
@@ -83,7 +83,7 @@ class m160623_103639_stripe_data extends \yii\db\Migration {
 			[ $this->site->id, 'live publishable key', 'Live Publishable Key', 'stripe','text', null ]
 		];
 
-		$this->batchInsert( $this->prefix . 'core_site_attribute', $columns, $attributes );
+		$this->batchInsert( $this->prefix . 'core_site_meta', $columns, $metas );
 	}
 
     public function down() {
