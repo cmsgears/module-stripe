@@ -1,5 +1,5 @@
 <?php
-namespace cmsgears\stripe\common\services;
+namespace cmsgears\stripe\common\services\entities;
 
 // Yii Imports
 use \Yii;
@@ -7,7 +7,9 @@ use \Yii;
 // CMG Imports
 use cmsgears\stripe\common\config\StripeProperties;
 
-class StripeCheckoutService extends \cmsgears\payment\common\services\PaymentService {
+use cmsgears\stripe\common\services\interfaces\entities\IStripeCheckoutService;
+
+class StripeCheckoutService extends \cmsgears\payment\common\services\entities\TransactionService implements IStripeCheckoutService {
 
     private $properties;
 
@@ -26,7 +28,7 @@ class StripeCheckoutService extends \cmsgears\payment\common\services\PaymentSer
 
     public function createPayment( $token, $amount ) {
 
-        $user   = Yii::$app->cmgCore->getAppUser();
+    	$user = Yii::$app->core->getAppUser();
 
         if( $this->properties->getStatus() == 'test' ) {
 
@@ -63,13 +65,10 @@ class StripeCheckoutService extends \cmsgears\payment\common\services\PaymentSer
 
     public static function updateData( $payment, $charge ) {
 
-        $payment->setDataAttribute( 'id', $charge->id );
-        $payment->setDataAttribute( 'amount', $charge->amount );
-        $payment->setDataAttribute( 'balance_transaction', $charge->balance_transaction );
+		$payment->setDataMeta( 'id', $charge->id );
+		$payment->setDataMeta( 'amount', $charge->amount );
+		$payment->setDataMeta( 'balance_transaction', $charge->balance_transaction );
+
         $payment->update();
     }
-
-
 }
-
-?>
