@@ -10,25 +10,20 @@ use cmsgears\stripe\common\config\StripeGlobal;
 class StripeProperties extends \cmsgears\core\common\config\CmgProperties {
 
 	const PROP_STATUS                   = 'status';
+	const PROP_PAYMENTS					= 'payments';
+	const PROP_CURRENCY                 = 'currency';
+
     const PROP_TEST_SECRET_KEY          = 'test secret key';
     const PROP_TEST_PUBLISHABLE_KEY     = 'test publishable key';
+
     const PROP_LIVE_SECRET_KEY          = 'live scret key';
     const PROP_LIVE_PUBLISHABLE_KEY     = 'live publishable key';
-    const PROP_CURRENCY                 = 'currency';
 
 	// Singleton instance
 	private static $instance;
 
 	// Constructor and Initialisation ------------------------------
 
-	private function __construct() {
-
-		// init code
-	}
-
-	/**
-	 * Return Singleton instance.
-	 */
 	public static function getInstance() {
 
 		if( !isset( self::$instance ) ) {
@@ -41,17 +36,15 @@ class StripeProperties extends \cmsgears\core\common\config\CmgProperties {
 		return self::$instance;
 	}
 
-	/**
-	 * Return rest property for the specified key.
-	 */
-	public function getProperty( $key ) {
-
-		return $this->properties[ key ];
-	}
 
 	public function getStatus() {
 
 		return $this->properties[ self::PROP_STATUS ];
+	}
+
+	public function isPayments() {
+
+		return $this->properties[ self::PROP_PAYMENT_ENABLED ];
 	}
 
 	public function isActive() {
@@ -86,5 +79,3 @@ class StripeProperties extends \cmsgears\core\common\config\CmgProperties {
         return $this->properties[ self::PROP_LIVE_PUBLISHABLE_KEY ];
     }
 }
-
-?>

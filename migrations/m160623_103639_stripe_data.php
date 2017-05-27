@@ -63,13 +63,13 @@ class m160623_103639_stripe_data extends \yii\db\Migration {
 		$columns = [ 'formId', 'name', 'label', 'type', 'compress', 'validators', 'order', 'icon', 'htmlOptions' ];
 
 		$fields	= [
-			[ $config->id, 'status', 'Status', FormField::TYPE_SELECT, false, 'required', 0, NULL, '{\"title\":\"Status\",\"items\":[\"test\",\"live\"]}' ],
-			[ $config->id, 'payments', 'Payments', FormField::TYPE_TOGGLE, false, 'required', 0, NULL, '{\"title\":\"Payments Enabled\"}' ],
-			[ $config->id, 'currency', 'Currency', FormField::TYPE_SELECT, false, 'required', 0, NULL, '{\"title\":\"Currency\",\"items\":[\"USD\",\"CAD\"]}' ],
-			[ $config->id, 'test secret key', 'Test Secret Key', FormField::TYPE_TEXT, false, 'required', 0, NULL, '{\"title\":\"Test Secret Key\",\"placeholder\":\"Test Secret Key\"}' ],
-			[ $config->id, 'test publishable key', 'Test Publishable Key', FormField::TYPE_PASSWORD, false, 'required', 0, NULL, '{\"title\":\"Test Publishable Key\",\"placeholder\":\"Test Publishable Key\"}' ],
-			[ $config->id, 'live secret key', 'Live Secret Key', FormField::TYPE_TEXT, false, 'required', 0, NULL, '{\"title\":\"Live Secret Key\",\"placeholder\":\"Live Secret Key\"}' ],
-			[ $config->id, 'live publishable key', 'Live Publishable Key', FormField::TYPE_PASSWORD, false, 'required', 0, NULL, '{\"title\":\"Live Publishable Key\",\"placeholder\":\"Live Publishable Key\"}' ]
+			[ $config->id, 'status', 'Status', FormField::TYPE_SELECT, false, 'required', 0, NULL, '{"title":"Status","items":{"test":"Test","live":"Live"}}' ],
+			[ $config->id, 'payments', 'Payments', FormField::TYPE_TOGGLE, false, 'required', 0, NULL, '{"title":"Payments Enabled"}' ],
+			[ $config->id, 'currency', 'Currency', FormField::TYPE_SELECT, false, 'required', 0, NULL, '{"title":"Currency","items":["USD","CAD"]}' ],
+			[ $config->id, 'test secret key', 'Test Secret Key', FormField::TYPE_TEXT, false, 'required', 0, NULL, '{"title":"Test Secret Key","placeholder":"Test Secret Key"}' ],
+			[ $config->id, 'test publishable key', 'Test Publishable Key', FormField::TYPE_PASSWORD, false, 'required', 0, NULL, '{"title":"Test Publishable Key","placeholder":"Test Publishable Key"}' ],
+			[ $config->id, 'live secret key', 'Live Secret Key', FormField::TYPE_TEXT, false, 'required', 0, NULL, '{"title":"Live Secret Key","placeholder":"Live Secret Key"}' ],
+			[ $config->id, 'live publishable key', 'Live Publishable Key', FormField::TYPE_PASSWORD, false, 'required', 0, NULL, '{"title":"Live Publishable Key","placeholder":"Live Publishable Key"}' ]
 		];
 
 		$this->batchInsert( $this->prefix . 'core_form_field', $columns, $fields );
