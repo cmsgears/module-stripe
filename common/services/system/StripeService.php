@@ -1,15 +1,15 @@
 <?php
-namespace cmsgears\stripe\common\services\entities;
+namespace cmsgears\stripe\common\services\system;
 
 // Yii Imports
-use \Yii;
+use Yii;
 
 // CMG Imports
 use cmsgears\stripe\common\config\StripeProperties;
 
-use cmsgears\stripe\common\services\interfaces\entities\IStripeCheckoutService;
+use cmsgears\stripe\common\services\interfaces\system\IStripeService;
 
-class StripeCheckoutService extends \cmsgears\payment\common\services\entities\TransactionService implements IStripeCheckoutService {
+class StripeService extends \yii\base\Component implements IStripeService {
 
     private $properties;
 

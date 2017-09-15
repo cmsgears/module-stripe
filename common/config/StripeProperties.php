@@ -1,28 +1,45 @@
 <?php
 namespace cmsgears\stripe\common\config;
 
-// Yii Imports
-use \Yii;
-
 // CMG Imports
 use cmsgears\stripe\common\config\StripeGlobal;
 
 class StripeProperties extends \cmsgears\core\common\config\CmgProperties {
 
+	// Variables ---------------------------------------------------
+
+	// Global -----------------
+
 	const PROP_STATUS                   = 'status';
 	const PROP_PAYMENTS					= 'payments';
 	const PROP_CURRENCY                 = 'currency';
 
-    const PROP_TEST_SECRET_KEY          = 'test secret key';
-    const PROP_TEST_PUBLISHABLE_KEY     = 'test publishable key';
+    const PROP_TEST_SECRET_KEY          = 'test_secret_key';
+    const PROP_TEST_PUBLISHABLE_KEY     = 'test_publishable_key';
 
-    const PROP_LIVE_SECRET_KEY          = 'live scret key';
-    const PROP_LIVE_PUBLISHABLE_KEY     = 'live publishable key';
+    const PROP_LIVE_SECRET_KEY          = 'live_scret_key';
+    const PROP_LIVE_PUBLISHABLE_KEY     = 'live_publishable_key';
+
+	// Public -----------------
+
+	// Protected --------------
+
+	// Private ----------------
 
 	// Singleton instance
 	private static $instance;
 
 	// Constructor and Initialisation ------------------------------
+
+	// Instance methods --------------------------------------------
+
+	// Yii parent classes --------------------
+
+	// CMG parent classes --------------------
+
+	// PaypalRestProperties ------------------
+
+	// Singleton
 
 	public static function getInstance() {
 
@@ -36,6 +53,7 @@ class StripeProperties extends \cmsgears\core\common\config\CmgProperties {
 		return self::$instance;
 	}
 
+	// Properties
 
 	public function getStatus() {
 

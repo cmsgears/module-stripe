@@ -1,10 +1,7 @@
 <?php
-namespace cmsgears\stripe\common\services\interfaces\entities;
+namespace cmsgears\stripe\common\services\interfaces\system;
 
-// CMG Imports
-use cmsgears\core\common\services\interfaces\base\IEntityService;
-
-interface IStripeCheckoutService extends IEntityService {
+interface IStripeService {
 
 	// Data Provider ------
 
