@@ -15,6 +15,8 @@ interface IStripeService {
 
 	// Create -------------
 
+	public function createPayment( $order, $token );
+
 	// Update -------------
 
 	// Delete -------------

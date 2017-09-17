@@ -1,8 +1,9 @@
 <?php
 namespace cmsgears\stripe\common\services\system;
 
-// Yii Imports
-use Yii;
+// Stripe Imports
+use Stripe\Stripe;
+use Stripe\Charge;
 
 // CMG Imports
 use cmsgears\stripe\common\config\StripeProperties;
@@ -11,64 +12,125 @@ use cmsgears\stripe\common\services\interfaces\system\IStripeService;
 
 class StripeService extends \yii\base\Component implements IStripeService {
 
-    private $properties;
+	// Variables ---------------------------------------------------
 
-    public function __construct( $baseUrl = null ) {
+	// Globals -------------------------------
 
-        $this->properties = StripeProperties::getInstance();
+	// Constants --------------
+
+	// Public -----------------
+
+	public static $modelClass	= '\cmsgears\stripe\common\models\entities\Transaction';
+
+	// Protected --------------
+
+	// Variables -----------------------------
+
+	// Public -----------------
+
+	// Protected --------------
+
+	// Private ----------------
+
+	private $properties;
+
+	// Traits ------------------------------------------------------
+
+	// Constructor and Initialisation ------------------------------
+
+	public function __construct( $config = [] ) {
+
+		$this->properties = StripeProperties::getInstance();
+
+		parent::__construct( $config );
+	}
+
+	// Instance methods --------------------------------------------
+
+	// Yii parent classes --------------------
+
+	// yii\base\Component -----
+
+	// CMG interfaces ------------------------
+
+	// CMG parent classes --------------------
+
+	// StripeService -------------------------
+
+	// Data Provider ------
+
+	// Read ---------------
+
+	// Read - Models ---
+
+	// Read - Lists ----
+
+	// Read - Maps -----
+
+	// Read - Others ---
+
+	// Create -------------
+
+    public function createPayment( $order, $token ) {
+
+		$this->initStripe();
+
+		$charge	= Charge::create([
+			'amount'   => $order->grandTotal * 100,
+			'currency' => $this->properties->getCurrency(),
+			'description' => $order->description,
+			'source' => $token
+		]);
+
+		return $charge;
     }
 
-    // Static Methods ----------------------------------------------
+	// Update -------------
 
-    // Read ----------------
+	// Delete -------------
 
-    // Data Provider ------
+	// SDK Configuration --
 
-    // Create -----------
+	private function initStripe() {
 
-    public function createPayment( $token, $amount ) {
+		$stripeConfig = [];
 
-    	$user = Yii::$app->core->getAppUser();
+		if( strcmp( $this->properties->getStatus(), 'test' ) == 0 ) {
 
-        if( $this->properties->getStatus() == 'test' ) {
+			$stripeConfig[ 'secret_key' ]		= $this->properties->getTestSecretKey();
+			$stripeConfig[ 'publishable_key' ]	= $this->properties->getTestPublishableKey();
+		}
+		else if( strcmp( $this->properties->getStatus(), 'live' ) == 0 ) {
 
-            $stripe = array(
-              "secret_key"      => $this->properties->getTestSecretKey(),
-              "publishable_key" => $this->properties->getTestPublishableKey()
-            );
-        }
-        else {
+			$stripeConfig[ 'secret_key' ]		= $this->properties->getLiveSecretKey();
+			$stripeConfig[ 'publishable_key' ]	= $this->properties->getLivePublishableKey();
+		}
 
-            $stripe = array(
-              "secret_key"      => $this->properties->getLiveSecretKey(),
-              "publishable_key" => $this->properties->getLivePublishableKey()
-            );
-        }
+		Stripe::setApiKey( $stripeConfig[ 'secret_key' ] );
+	}
 
-        \Stripe\Stripe::setApiKey( $stripe[ 'secret_key' ] );
+	// Static Methods ----------------------------------------------
 
-          $customer = \Stripe\Customer::create(array(
-              'email' => $user->email,
-              'source'  => $token
-          ));
+	// CMG parent classes --------------------
 
-          $charge = \Stripe\Charge::create(array(
-              'customer' => $customer->id,
-              'amount'   => $amount*100,
-              'currency' => $this->properties->getCurrency()
-          ));
+	// StripeService -------------------------
 
-          return $charge;
-    }
+	// Data Provider ------
 
-    // Update -----------
+	// Read ---------------
 
-    public static function updateData( $payment, $charge ) {
+	// Read - Models ---
 
-		$payment->setDataMeta( 'id', $charge->id );
-		$payment->setDataMeta( 'amount', $charge->amount );
-		$payment->setDataMeta( 'balance_transaction', $charge->balance_transaction );
+	// Read - Lists ----
 
-        $payment->update();
-    }
+	// Read - Maps -----
+
+	// Read - Others ---
+
+	// Create -------------
+
+	// Update -------------
+
+	// Delete -------------
+
 }

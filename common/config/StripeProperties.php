@@ -62,7 +62,7 @@ class StripeProperties extends \cmsgears\core\common\config\CmgProperties {
 
 	public function isPayments() {
 
-		return $this->properties[ self::PROP_PAYMENT_ENABLED ];
+		return $this->properties[ self::PROP_PAYMENTS ];
 	}
 
 	public function isActive() {
@@ -96,4 +96,20 @@ class StripeProperties extends \cmsgears\core\common\config\CmgProperties {
 
         return $this->properties[ self::PROP_LIVE_PUBLISHABLE_KEY ];
     }
+
+	public function getPublishableKey() {
+
+		switch( $this->properties[ self::PROP_STATUS ] ) {
+
+			case 'test': {
+
+				return $this->properties[ self::PROP_TEST_PUBLISHABLE_KEY ];
+			}
+
+			case 'live': {
+
+				return $this->properties[ self::PROP_LIVE_PUBLISHABLE_KEY ];
+			}
+		}
+	}
 }
