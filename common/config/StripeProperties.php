@@ -17,7 +17,7 @@ class StripeProperties extends \cmsgears\core\common\config\CmgProperties {
     const PROP_TEST_SECRET_KEY          = 'test_secret_key';
     const PROP_TEST_PUBLISHABLE_KEY     = 'test_publishable_key';
 
-    const PROP_LIVE_SECRET_KEY          = 'live_scret_key';
+    const PROP_LIVE_SECRET_KEY          = 'live_secret_key';
     const PROP_LIVE_PUBLISHABLE_KEY     = 'live_publishable_key';
 
 	// Public -----------------
@@ -105,7 +105,6 @@ class StripeProperties extends \cmsgears\core\common\config\CmgProperties {
 
 				return $this->properties[ self::PROP_TEST_PUBLISHABLE_KEY ];
 			}
-
 			case 'live': {
 
 				return $this->properties[ self::PROP_LIVE_PUBLISHABLE_KEY ];
