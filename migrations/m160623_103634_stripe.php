@@ -1,6 +1,4 @@
 <?php
-// CMG Imports
-use cmsgears\core\common\config\CoreGlobal;
 
 class m160623_103634_stripe extends \yii\db\Migration {
 

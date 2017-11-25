@@ -63,13 +63,13 @@ class m160623_103639_stripe_data extends \yii\db\Migration {
 		$columns = [ 'formId', 'name', 'label', 'type', 'compress', 'validators', 'order', 'icon', 'htmlOptions' ];
 
 		$fields	= [
-			[ $config->id, 'status', 'Status', FormField::TYPE_SELECT, false, 'required', 0, NULL, '{\"title\":\"Status\",\"items\":[\"test\",\"live\"]}' ],
-			[ $config->id, 'payments', 'Payments', FormField::TYPE_TOGGLE, false, 'required', 0, NULL, '{\"title\":\"Payments Enabled\"}' ],
-			[ $config->id, 'currency', 'Currency', FormField::TYPE_SELECT, false, 'required', 0, NULL, '{\"title\":\"Currency\",\"items\":[\"USD\",\"CAD\"]}' ],
-			[ $config->id, 'test secret key', 'Test Secret Key', FormField::TYPE_TEXT, false, 'required', 0, NULL, '{\"title\":\"Test Secret Key\",\"placeholder\":\"Test Secret Key\"}' ],
-			[ $config->id, 'test publishable key', 'Test Publishable Key', FormField::TYPE_PASSWORD, false, 'required', 0, NULL, '{\"title\":\"Test Publishable Key\",\"placeholder\":\"Test Publishable Key\"}' ],
-			[ $config->id, 'live secret key', 'Live Secret Key', FormField::TYPE_TEXT, false, 'required', 0, NULL, '{\"title\":\"Live Secret Key\",\"placeholder\":\"Live Secret Key\"}' ],
-			[ $config->id, 'live publishable key', 'Live Publishable Key', FormField::TYPE_PASSWORD, false, 'required', 0, NULL, '{\"title\":\"Live Publishable Key\",\"placeholder\":\"Live Publishable Key\"}' ]
+			[ $config->id, 'status', 'Status', FormField::TYPE_SELECT, false, 'required', 0, NULL, '{"title":"Status","items":{"test":"Test","live":"Live"}}' ],
+			[ $config->id, 'payments', 'Payments', FormField::TYPE_TOGGLE, false, 'required', 0, NULL, '{"title":"Payments Enabled"}' ],
+			[ $config->id, 'currency', 'Currency', FormField::TYPE_SELECT, false, 'required', 0, NULL, '{"title":"Currency","items":{"USD":"USD","CAD":"CAD"}}' ],
+			[ $config->id, 'test_secret_key', 'Test Secret Key', FormField::TYPE_PASSWORD, false, 'required', 0, NULL, '{"title":"Test Secret Key","placeholder":"Test Secret Key"}' ],
+			[ $config->id, 'test_publishable_key', 'Test Publishable Key', FormField::TYPE_TEXT, false, 'required', 0, NULL, '{"title":"Test Publishable Key","placeholder":"Test Publishable Key"}' ],
+			[ $config->id, 'live_secret_key', 'Live Secret Key', FormField::TYPE_PASSWORD, false, 'required', 0, NULL, '{"title":"Live Secret Key","placeholder":"Live Secret Key"}' ],
+			[ $config->id, 'live_publishable_key', 'Live Publishable Key', FormField::TYPE_TEXT, false, 'required', 0, NULL, '{"title":"Live Publishable Key","placeholder":"Live Publishable Key"}' ]
 		];
 
 		$this->batchInsert( $this->prefix . 'core_form_field', $columns, $fields );
@@ -83,10 +83,10 @@ class m160623_103639_stripe_data extends \yii\db\Migration {
 			[ $this->site->id, 'status', 'Status', 'stripe','text', null ],
 			[ $this->site->id, 'payments', 'Payments', 'stripe','flag', '0' ],
 			[ $this->site->id, 'currency','Currency', 'stripe','text', 'USD' ],
-			[ $this->site->id, 'test secret key', 'Test Secret Key', 'stripe','text', null ],
-			[ $this->site->id, 'test publishable key', 'Test Publishable Key', 'stripe','text', null ],
-			[ $this->site->id, 'live secret key', 'Live Secret Key', 'stripe','text', null ],
-			[ $this->site->id, 'live publishable key', 'Live Publishable Key', 'stripe','text', null ]
+			[ $this->site->id, 'test_secret_key', 'Test Secret Key', 'stripe','text', null ],
+			[ $this->site->id, 'test_publishable_key', 'Test Publishable Key', 'stripe','text', null ],
+			[ $this->site->id, 'live_secret_key', 'Live Secret Key', 'stripe','text', null ],
+			[ $this->site->id, 'live_publishable_key', 'Live Publishable Key', 'stripe','text', null ]
 		];
 
 		$this->batchInsert( $this->prefix . 'core_site_meta', $columns, $metas );
