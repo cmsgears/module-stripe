@@ -4,6 +4,8 @@ namespace cmsgears\stripe\common\services\system;
 // Stripe Imports
 use Stripe\Stripe;
 use Stripe\Charge;
+use Stripe\Refund;
+
 
 // CMG Imports
 use cmsgears\stripe\common\config\StripeProperties;
@@ -80,6 +82,22 @@ class StripeService extends \yii\base\Component implements IStripeService {
 			'currency' => $this->properties->getCurrency(),
 			'description' => $order->description,
 			'source' => $token
+		]);
+
+		return $charge;
+    }
+
+
+	public function refundPayment( $order ) {
+
+		$this->initStripe();
+
+		$transaction = $order->getTransaction()->one();
+		$data		= json_decode( $transaction->data );
+		$paymentId	=  $data->paymentId;
+	
+		$charge	= Refund::create([
+			'charge'   => $paymentId
 		]);
 
 		return $charge;
