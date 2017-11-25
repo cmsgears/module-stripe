@@ -6,6 +6,7 @@ use Stripe\Stripe;
 use Stripe\Charge;
 use Stripe\Refund;
 
+
 // CMG Imports
 use cmsgears\stripe\common\config\StripeProperties;
 
@@ -86,6 +87,7 @@ class StripeService extends \yii\base\Component implements IStripeService {
 		return $charge;
     }
 
+
 	public function refundPayment( $order ) {
 
 		$this->initStripe();
@@ -100,6 +102,7 @@ class StripeService extends \yii\base\Component implements IStripeService {
 
 		return $charge;
     }
+
 	// Update -------------
 
 	// Delete -------------
