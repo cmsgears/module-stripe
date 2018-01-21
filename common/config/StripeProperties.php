@@ -1,34 +1,46 @@
 <?php
 namespace cmsgears\stripe\common\config;
 
-// Yii Imports
-use \Yii;
-
 // CMG Imports
 use cmsgears\stripe\common\config\StripeGlobal;
 
 class StripeProperties extends \cmsgears\core\common\config\CmgProperties {
 
+	// Variables ---------------------------------------------------
+
+	// Global -----------------
+
 	const PROP_STATUS                   = 'status';
-    const PROP_TEST_SECRET_KEY          = 'test secret key';
-    const PROP_TEST_PUBLISHABLE_KEY     = 'test publishable key';
-    const PROP_LIVE_SECRET_KEY          = 'live scret key';
-    const PROP_LIVE_PUBLISHABLE_KEY     = 'live publishable key';
-    const PROP_CURRENCY                 = 'currency';
+	const PROP_PAYMENTS					= 'payments';
+	const PROP_CURRENCY                 = 'currency';
+
+    const PROP_TEST_SECRET_KEY          = 'test_secret_key';
+    const PROP_TEST_PUBLISHABLE_KEY     = 'test_publishable_key';
+
+    const PROP_LIVE_SECRET_KEY          = 'live_secret_key';
+    const PROP_LIVE_PUBLISHABLE_KEY     = 'live_publishable_key';
+
+	// Public -----------------
+
+	// Protected --------------
+
+	// Private ----------------
 
 	// Singleton instance
 	private static $instance;
 
 	// Constructor and Initialisation ------------------------------
 
-	private function __construct() {
+	// Instance methods --------------------------------------------
 
-		// init code
-	}
+	// Yii parent classes --------------------
 
-	/**
-	 * Return Singleton instance.
-	 */
+	// CMG parent classes --------------------
+
+	// PaypalRestProperties ------------------
+
+	// Singleton
+
 	public static function getInstance() {
 
 		if( !isset( self::$instance ) ) {
@@ -41,17 +53,16 @@ class StripeProperties extends \cmsgears\core\common\config\CmgProperties {
 		return self::$instance;
 	}
 
-	/**
-	 * Return rest property for the specified key.
-	 */
-	public function getProperty( $key ) {
-
-		return $this->properties[ key ];
-	}
+	// Properties
 
 	public function getStatus() {
 
 		return $this->properties[ self::PROP_STATUS ];
+	}
+
+	public function isPayments() {
+
+		return $this->properties[ self::PROP_PAYMENTS ];
 	}
 
 	public function isActive() {
@@ -85,6 +96,19 @@ class StripeProperties extends \cmsgears\core\common\config\CmgProperties {
 
         return $this->properties[ self::PROP_LIVE_PUBLISHABLE_KEY ];
     }
-}
 
-?>
+	public function getPublishableKey() {
+
+		switch( $this->properties[ self::PROP_STATUS ] ) {
+
+			case 'test': {
+
+				return $this->properties[ self::PROP_TEST_PUBLISHABLE_KEY ];
+			}
+			case 'live': {
+
+				return $this->properties[ self::PROP_LIVE_PUBLISHABLE_KEY ];
+			}
+		}
+	}
+}

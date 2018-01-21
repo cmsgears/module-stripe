@@ -14,10 +14,10 @@
 		}
 	},
     "require": {
-        "php": ">=5.4.0",
+        "php": ">=7.0.0",
         "cmsgears/module-core": "*",
         "cmsgears/module-payment": "*",
         "cmsgears/module-cart": "*",
-    	"stripe/stripe-php": "3.20.*"
+    	"stripe/stripe-php": "5.2.*"
     }
 }
