@@ -6,6 +6,3 @@
  * @link https://www.cmsgears.org/
  * @copyright Copyright (c) 2015 VulpineCode Technologies Pvt. Ltd.
  */
-
-$core	= Yii::$app->core;
-$user	= Yii::$app->user->getIdentity();

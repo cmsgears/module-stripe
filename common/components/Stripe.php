@@ -1,10 +1,24 @@
 <?php
+/**
+ * This file is part of CMSGears Framework. Please view License file distributed
+ * with the source code for license details.
+ *
+ * @link https://www.cmsgears.org/
+ * @copyright Copyright (c) 2015 VulpineCode Technologies Pvt. Ltd.
+ */
+
 namespace cmsgears\stripe\common\components;
 
 // Yii Imports
 use Yii;
+use yii\base\Component;
 
-class Stripe extends \yii\base\Component {
+/**
+ * Stripe component register the services provided by Stripe Module.
+ *
+ * @since 1.0.0
+ */
+class Stripe extends Component {
 
 	// Global -----------------
 
@@ -17,13 +31,13 @@ class Stripe extends \yii\base\Component {
 	// Constructor and Initialisation ------------------------------
 
 	/**
-	 * Initialise the CMG Core Component.
+	 * Initialize the services.
 	 */
 	public function init() {
 
 		parent::init();
 
-		// Register application components and objects i.e. CMG and Project
+		// Register components and objects
 		$this->registerComponents();
 	}
 
@@ -39,24 +53,33 @@ class Stripe extends \yii\base\Component {
 
 	// Components and Objects
 
+	/**
+	 * Register the services.
+	 */
 	public function registerComponents() {
 
 		// Register services
-		$this->registerEntityServices();
+		$this->registerResourceServices();
 		$this->registerSystemServices();
 
 		// Init services
-		$this->initEntityServices();
+		$this->initResourceServices();
 		$this->initSystemServices();
 	}
 
-	public function registerEntityServices() {
+	/**
+	 * Registers resource services.
+	 */
+	public function registerResourceServices() {
 
 		$factory = Yii::$app->factory->getContainer();
 
-		$factory->set( 'cmsgears\stripe\common\services\interfaces\entities\ITransactionService', 'cmsgears\stripe\common\services\entities\TransactionService' );
+		$factory->set( 'cmsgears\stripe\common\services\interfaces\resources\ITransactionService', 'cmsgears\stripe\common\services\resources\TransactionService' );
 	}
 
+	/**
+	 * Registers system services.
+	 */
 	public function registerSystemServices() {
 
 		$factory = Yii::$app->factory->getContainer();
@@ -64,17 +87,24 @@ class Stripe extends \yii\base\Component {
 		$factory->set( 'cmsgears\stripe\common\services\interfaces\system\IStripeService', 'cmsgears\stripe\common\services\system\StripeService' );
 	}
 
-	public function initEntityServices() {
+	/**
+	 * Initialize resource services.
+	 */
+	public function initResourceServices() {
 
 		$factory = Yii::$app->factory->getContainer();
 
-		$factory->set( 'stripeTransactionService', 'cmsgears\stripe\common\services\entities\TransactionService' );
+		$factory->set( 'stripeTransactionService', 'cmsgears\stripe\common\services\resources\TransactionService' );
 	}
 
+	/**
+	 * Initialize system services.
+	 */
 	public function initSystemServices() {
 
 		$factory = Yii::$app->factory->getContainer();
 
 		$factory->set( 'stripeService', 'cmsgears\stripe\common\services\system\StripeService' );
 	}
+
 }

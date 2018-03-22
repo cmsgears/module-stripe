@@ -1,6 +1,22 @@
 <?php
+/**
+ * This file is part of CMSGears Framework. Please view License file distributed
+ * with the source code for license details.
+ *
+ * @link https://www.cmsgears.org/
+ * @copyright Copyright (c) 2015 VulpineCode Technologies Pvt. Ltd.
+ */
 
-class m160623_103634_stripe extends \yii\db\Migration {
+// CMG Imports
+use cmsgears\core\common\base\Migration;
+
+/**
+ * The stripe migration inserts the database tables of stripe module. It also insert the foreign
+ * keys if FK flag of migration component is true.
+ *
+ * @since 1.0.0
+ */
+class m160623_103634_stripe extends Migration {
 
 	// Public Variables
 
@@ -34,4 +50,5 @@ class m160623_103634_stripe extends \yii\db\Migration {
     public function down() {
 
     }
+
 }
