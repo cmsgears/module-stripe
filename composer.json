@@ -14,9 +14,9 @@
 		}
 	},
     "require": {
+    	"stripe/stripe-php": "6.4.*",
         "cmsgears/module-core": "*",
         "cmsgears/module-payment": "*",
-        "cmsgears/module-cart": "*",
-    	"stripe/stripe-php": "6.4.*"
+        "cmsgears/module-cart": "*"
     }
 }
