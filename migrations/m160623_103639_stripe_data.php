@@ -65,10 +65,10 @@ class m160623_103639_stripe_data extends Migration {
             'name' => 'Config Stripe', 'slug' => 'config-stripe',
             'type' => CoreGlobal::TYPE_SYSTEM,
             'description' => 'Stripe configuration form.',
-            'successMessage' => 'All configurations saved successfully.',
+            'success' => 'All configurations saved successfully.',
             'captcha' => false,
             'visibility' => Form::VISIBILITY_PROTECTED,
-            'active' => true, 'userMail' => false,'adminMail' => false,
+            'status' => Form::STATUS_ACTIVE, 'userMail' => false,'adminMail' => false,
             'createdAt' => DateUtil::getDateTime(),
             'modifiedAt' => DateUtil::getDateTime()
         ]);
@@ -92,16 +92,16 @@ class m160623_103639_stripe_data extends Migration {
 
 	private function insertDefaultConfig() {
 
-		$columns = [ 'modelId', 'name', 'label', 'type', 'valueType', 'value' ];
+		$columns = [ 'modelId', 'name', 'label', 'type', 'active', 'valueType', 'value', 'data' ];
 
 		$metas	= [
-			[ $this->site->id, 'status', 'Status', 'stripe','text', null ],
-			[ $this->site->id, 'payments', 'Payments', 'stripe','flag', '0' ],
-			[ $this->site->id, 'currency','Currency', 'stripe','text', 'USD' ],
-			[ $this->site->id, 'test_secret_key', 'Test Secret Key', 'stripe','text', null ],
-			[ $this->site->id, 'test_publishable_key', 'Test Publishable Key', 'stripe','text', null ],
-			[ $this->site->id, 'live_secret_key', 'Live Secret Key', 'stripe','text', null ],
-			[ $this->site->id, 'live_publishable_key', 'Live Publishable Key', 'stripe','text', null ]
+			[ $this->site->id, 'status', 'Status', 'stripe', 1, 'text', NULL, NULL ],
+			[ $this->site->id, 'payments', 'Payments', 'stripe', 1, 'flag', '0', NULL ],
+			[ $this->site->id, 'currency','Currency', 'stripe', 1, 'text', 'USD', NULL ],
+			[ $this->site->id, 'test_secret_key', 'Test Secret Key', 'stripe', 1, 'text', NULL, NULL ],
+			[ $this->site->id, 'test_publishable_key', 'Test Publishable Key', 'stripe', 1, 'text', NULL, NULL ],
+			[ $this->site->id, 'live_secret_key', 'Live Secret Key', 'stripe', 1, 'text', NULL, NULL ],
+			[ $this->site->id, 'live_publishable_key', 'Live Publishable Key', 'stripe', 1, 'text', NULL, NULL ]
 		];
 
 		$this->batchInsert( $this->prefix . 'core_site_meta', $columns, $metas );
