@@ -1,4 +1,12 @@
 <?php
+/**
+ * This file is part of CMSGears Framework. Please view License file distributed
+ * with the source code for license details.
+ *
+ * @link https://www.cmsgears.org/
+ * @copyright Copyright (c) 2015 VulpineCode Technologies Pvt. Ltd.
+ */
+
 namespace cmsgears\stripe\common\services\system;
 
 // Stripe Imports
@@ -6,27 +14,23 @@ use Stripe\Stripe;
 use Stripe\Charge;
 use Stripe\Refund;
 
-
 // CMG Imports
 use cmsgears\stripe\common\config\StripeProperties;
 
 use cmsgears\stripe\common\services\interfaces\system\IStripeService;
 
-class StripeService extends \yii\base\Component implements IStripeService {
+use cmsgears\core\common\services\base\SystemService;
+
+/**
+ * StripeService provide methods specific to Stripe APIs to handle transactions.
+ *
+ * @since 1.0.0
+ */
+class StripeService extends SystemService implements IStripeService {
 
 	// Variables ---------------------------------------------------
 
-	// Globals -------------------------------
-
-	// Constants --------------
-
-	// Public -----------------
-
-	public static $modelClass	= '\cmsgears\stripe\common\models\entities\Transaction';
-
-	// Protected --------------
-
-	// Variables -----------------------------
+	// Globals ----------------
 
 	// Public -----------------
 
@@ -49,29 +53,15 @@ class StripeService extends \yii\base\Component implements IStripeService {
 
 	// Instance methods --------------------------------------------
 
-	// Yii parent classes --------------------
+	// Yii interfaces ------------------------
 
-	// yii\base\Component -----
+	// Yii parent classes --------------------
 
 	// CMG interfaces ------------------------
 
 	// CMG parent classes --------------------
 
 	// StripeService -------------------------
-
-	// Data Provider ------
-
-	// Read ---------------
-
-	// Read - Models ---
-
-	// Read - Lists ----
-
-	// Read - Maps -----
-
-	// Read - Others ---
-
-	// Create -------------
 
     public function createPayment( $order, $token ) {
 
@@ -95,17 +85,13 @@ class StripeService extends \yii\base\Component implements IStripeService {
 		$transaction = $order->getTransaction()->one();
 		$data		= json_decode( $transaction->data );
 		$paymentId	=  $data->paymentId;
-	
+
 		$charge	= Refund::create([
 			'charge'   => $paymentId
 		]);
 
 		return $charge;
     }
-
-	// Update -------------
-
-	// Delete -------------
 
 	// SDK Configuration --
 
@@ -126,29 +112,5 @@ class StripeService extends \yii\base\Component implements IStripeService {
 
 		Stripe::setApiKey( $stripeConfig[ 'secret_key' ] );
 	}
-
-	// Static Methods ----------------------------------------------
-
-	// CMG parent classes --------------------
-
-	// StripeService -------------------------
-
-	// Data Provider ------
-
-	// Read ---------------
-
-	// Read - Models ---
-
-	// Read - Lists ----
-
-	// Read - Maps -----
-
-	// Read - Others ---
-
-	// Create -------------
-
-	// Update -------------
-
-	// Delete -------------
 
 }
