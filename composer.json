@@ -4,7 +4,7 @@
 	"homepage": "http://www.cmsgears.org",
 	"type": "package",
 	"keywords": [ "yii2", "cmsgears", "module", "stripe" ],
-	"license": "GPLv3",
+	"license": "GPL-3.0-or-later",
 	"support": {
 		"resources": "http://www.cmsgears.org"
 	},
